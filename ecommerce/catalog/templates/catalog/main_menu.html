@@ -18,6 +18,7 @@
             <div class="product">
                 <img src="{{item.image.url}}" alt="{{item.name}}" width="400" height="400"> <br>
                 <a href="{% url 'product_detail' item.pk %}">{{item.name}}</a>
+                <a class="buy-now-button" href="{% url 'add_to_cart' item.id %}">Add to Cart</a>
             </div>
         {% endfor %}
     {% else %}
