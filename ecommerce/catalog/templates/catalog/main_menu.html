@@ -8,11 +8,11 @@
     <style>
         .product {
                 text-align: center;
-            }
-        
+        }
 </style>
 </head>
 <body>
+    <a href="{% url 'main_menu' %}">main menu</a>
     {% if products %}
         {% for item in products %}
             <div class="product">
