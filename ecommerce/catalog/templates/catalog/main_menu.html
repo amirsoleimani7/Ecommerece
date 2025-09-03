@@ -8,16 +8,16 @@
     <style>
         .product {
                 text-align: center;
-                border-radius: 20%;
             }
-    </style>
+        
+</style>
 </head>
 <body>
     {% if products %}
         {% for item in products %}
             <div class="product">
                 <img src="{{item.image.url}}" alt="{{item.name}}" width="400" height="400"> <br>
-                {{item.name}}
+                <a href="{% url 'product_detail' item.pk %}">{{item.name}}</a>
             </div>
         {% endfor %}
     {% else %}
