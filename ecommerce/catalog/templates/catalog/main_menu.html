@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Menu</title>
+
+    <style>
+        .product {
+                text-align: center;
+                border-radius: 20%;
+            }
+    </style>
+</head>
+<body>
+    {% if products %}
+        {% for item in products %}
+            <div class="product">
+                <img src="{{item.image.url}}" alt="{{item.name}}" width="400" height="400"> <br>
+                {{item.name}}
+            </div>
+        {% endfor %}
+    {% else %}
+        No Products at the moment
+    {% endif %}
+</body>
+</html>
