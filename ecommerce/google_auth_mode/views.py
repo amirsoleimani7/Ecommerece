@@ -31,23 +31,22 @@ def google_login(request):
     request.session['state'] = state
     
     return redirect(authorization_url)
-
-def google_callback(requeset):
-    
+def google_callback(request):
     flow = Flow.from_client_secrets_file(
-        CLIENT_SECRETS_FILE,
+        CLIENT_SECRET_FILES,
         scopes=SCOPES,
         redirect_uri=REDIRECT_URI,
     )
-    flow.fetch_token(authentication_respone=requeset.build_absolute_uri())
+
+    # Correct argument + correct spelling
+    flow.fetch_token(authorization_response=request.build_absolute_uri())
 
     credentials = flow.credentials
-    service = build('gamil' , 'v1' , credentials=credentials)
+    service = build('gmail', 'v1', credentials=credentials)
 
     # fetching the messages
-    result = service.users().message().list(userId='me' , maxResults=5).execute()
-    messages = result.get('messages' , [])
-    
+    result = service.users().messages().list(userId='me', maxResults=5).execute()
+    messages = result.get('messages', [])
 
     email_data = []
     for msg in messages:
@@ -60,9 +59,10 @@ def google_callback(requeset):
             'subject': subject,
             'sender': sender,
             'snippet': snippet,
-    })
+        })
 
-    return render(requeset , 'google_auth_mode/emails.html' , {'emails' : email_data})
+    return render(request, 'google_auth_mode/email.html', {'emails': email_data})
+
 
 def fetch_emails(request):
     creds = None
