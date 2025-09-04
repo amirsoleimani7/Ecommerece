@@ -13,6 +13,7 @@ from google_auth_oauthlib.flow import Flow
 
 
 CLIENT_SECRET_FILES = os.path.join(settings.BASE_DIR , 'cred.json')
+
 SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
 
 REDIRECT_URI = 'http://localhost:8000/google/callback/'
@@ -32,7 +33,7 @@ def google_login(request):
     return redirect(authorization_url)
 
 def google_callback(requeset):
-
+    
     flow = Flow.from_client_secrets_file(
         CLIENT_SECRETS_FILE,
         scopes=SCOPES,
